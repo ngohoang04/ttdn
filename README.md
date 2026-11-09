@@ -1,36 +1,21 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Docuflow frontend
 
-## Getting Started
+Giao diện Next.js cho admin, QA và CTV.
 
-First, run the development server:
+## Chạy ở máy cá nhân
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. Khởi động backend và database theo [hướng dẫn backend](../backend/README.md).
+2. Chạy `npm ci` rồi `npm run dev`.
+3. Mở `http://localhost:3000`.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Frontend gọi API qua đường dẫn `/api/*`; Next.js chuyển tiếp tới backend. Mặc định backend ở `http://localhost:4000`. Nếu backend ở nơi khác, đặt `BACKEND_URL` bằng origin của backend **trước khi build hoặc khởi động Next.js**, ví dụ `BACKEND_URL=https://api.docuflow.example.com`. Không thêm `/api` vào giá trị này.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Kiểm tra và triển khai
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Kiểm tra mã bằng `npm run lint`; build production bằng `npm run build`; chạy bản build bằng `npm run start`.
+- Khi triển khai, cấu hình `BACKEND_URL` trên máy chạy Next.js và `FRONTEND_URL` trên backend. Backend phải truy cập được từ máy chạy Next.js.
+- Kiểm tra đăng nhập lần lượt với admin, QA, CTV; tạo lô, giao việc, nộp, duyệt, xem lịch sử và tải CSV đã duyệt.
+- Lịch sử duyệt có tìm kiếm, lọc theo kết quả và phân trang 20 lượt; QA chỉ thấy các lượt của công việc mình quản lý.
+- Báo cáo duyệt hiển thị kết quả theo lô, lượt duyệt gần đây và file được CTV báo lỗi. QA/admin có thể mở lại việc hoặc thay file để giao lại.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+README này mô tả cách chạy và luồng demo. Dữ liệu thật và tài khoản demo cần được chuẩn bị riêng trong database; không lưu mật khẩu trong repository.
